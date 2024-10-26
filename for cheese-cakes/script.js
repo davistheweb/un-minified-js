@@ -96,13 +96,21 @@ let swiperCards = new Swiper(".cheese-content", {
         viewMoreMenu.classList.toggle('show-menu');
     }
 
-    viewMoreButton.addEventListener('click', function () {
+    viewMoreButton.addEventListener('click', function (e) {
+      e.stopPropagation();
         toggleMenu();
     });
 
     const closeCheeseMenuButton = document.querySelector('.close__cheese__menu');
-    closeCheeseMenuButton.addEventListener('click', function () {
+    closeCheeseMenuButton.addEventListener('click', function (e) {
+      e.stopPropagation();
         toggleMenu();
+    });
+
+    document.addEventListener('click', (e) => {
+      if(!viewMoreButton.contains(e.target) && !closeCheeseMenuButton.contains(e.target)){
+        viewMoreMenu.classList.remove('show-menu');
+      }
     });
   });
 
